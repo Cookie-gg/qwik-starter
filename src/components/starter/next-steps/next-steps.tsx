@@ -28,9 +28,10 @@ export const GETTING_STARTED_STEPS = [
   },
 ];
 
-export default component$(() => {
+export const Starter = component$(() => {
   const gettingStartedStep = useSignal(0);
 
+  // window.addEventListener('keydown', (e) => ...);
   useOnWindow(
     'keydown',
     $((e) => {

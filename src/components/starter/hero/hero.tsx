@@ -1,7 +1,7 @@
 import { component$ } from '@builder.io/qwik';
 import styles from './hero.module.css';
 
-export default component$(() => {
+export const Hero = component$(() => {
   return (
     <div class={['container', styles.hero]}>
       <h1>

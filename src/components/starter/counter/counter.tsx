@@ -2,7 +2,7 @@ import { component$, useSignal, $ } from '@builder.io/qwik';
 import styles from './counter.module.css';
 import Gauge from '../gauge';
 
-export default component$(() => {
+export const Counter = component$(() => {
   const count = useSignal(70);
 
   const setCount = $((newValue: number) => {

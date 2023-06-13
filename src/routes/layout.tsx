@@ -18,7 +18,9 @@ export const onGet: RequestHandler = async ({ cacheControl }) => {
   });
 };
 
+// This function is called each time the route is loaded.
 export const useServerTimeLoader = routeLoader$(() => {
+  // console.log(req);
   return {
     date: new Date().toISOString(),
   };

@@ -1,7 +1,8 @@
+import type {
+  Signal} from '@builder.io/qwik';
 import {
   $,
   Resource,
-  Signal,
   component$,
   createContextId,
   useComputed$,

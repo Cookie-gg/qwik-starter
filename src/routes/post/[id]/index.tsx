@@ -1,5 +1,6 @@
-import { component$, useVisibleTask$ } from '@builder.io/qwik';
-import { DocumentHead, useContent, useLocation } from '@builder.io/qwik-city';
+import { component$ } from '@builder.io/qwik';
+import type { DocumentHead} from '@builder.io/qwik-city';
+import { useLocation } from '@builder.io/qwik-city';
 import { useServerTimeLoader } from '~/routes/layout';
 
 export default component$(() => {

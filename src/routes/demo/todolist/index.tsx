@@ -1,12 +1,5 @@
 import { component$ } from '@builder.io/qwik';
-import {
-  type DocumentHead,
-  routeLoader$,
-  routeAction$,
-  zod$,
-  z,
-  Form,
-} from '@builder.io/qwik-city';
+import { type DocumentHead, routeLoader$, routeAction$, zod$, z, Form } from '@builder.io/qwik-city';
 import styles from './todolist.module.css';
 
 interface ListItem {
@@ -21,6 +14,8 @@ export const useListLoader = routeLoader$(() => {
 
 export const useAddToListAction = routeAction$(
   (item) => {
+    // You can get only the data you need from the form
+    console.log(item);
     list.push(item);
     return {
       success: true,

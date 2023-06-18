@@ -1,4 +1,4 @@
-import { component$, useVisibleTask$, useStore, useStylesScoped$ } from '@builder.io/qwik';
+import { component$, useVisibleTask$, useStore, useStylesScoped$, $ } from '@builder.io/qwik';
 import { type DocumentHead, useLocation } from '@builder.io/qwik-city';
 import styles from './flower.css?inline';
 
@@ -6,18 +6,32 @@ export default component$(() => {
   useStylesScoped$(styles);
   const loc = useLocation();
 
-  const state = useStore({
-    count: 0,
-    number: 20,
-  });
+  const state = useStore(
+    {
+      count: 0,
+      number: 20,
+      setCount: $((ev: Event) => {
+        if (ev.target instanceof HTMLInputElement) {
+          state.count = ev.target.valueAsNumber;
+        }
+      }),
+    },
+    {
+      deep: false, // トッププロパティのみを監視する
+    }
+  );
 
-  useVisibleTask$(({ cleanup }) => {
-    const timeout = setTimeout(() => (state.count = 1), 500);
-    cleanup(() => clearTimeout(timeout));
+  useVisibleTask$(
+    ({ cleanup }) => {
+      const timeout = setTimeout(() => (state.count = 1), 500);
+      cleanup(() => clearTimeout(timeout));
 
-    const internal = setInterval(() => state.count++, 7000);
-    cleanup(() => clearInterval(internal));
-  });
+      const internal = setInterval(() => state.count++, 7000);
+      cleanup(() => clearInterval(internal));
+    },
+    // 発火タイミングを指定する
+    { strategy: 'document-ready' }
+  );
 
   return (
     <div class="container container-center">
@@ -26,15 +40,7 @@ export default component$(() => {
         <span class="highlight">Generate</span> Flowers
       </h1>
 
-      <input
-        class="input"
-        type="range"
-        value={state.number}
-        max={50}
-        onInput$={(ev) => {
-          state.number = (ev.target as HTMLInputElement).valueAsNumber;
-        }}
-      />
+      <input class="input" type="range" value={state.number} max={50} onInput$={state.setCount} />
       <div
         style={{
           '--state': `${state.count * 0.1}`,

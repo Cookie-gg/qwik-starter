@@ -1,3 +1,4 @@
+import type { QwikMouseEvent } from '@builder.io/qwik';
 import { component$, useSignal, $ } from '@builder.io/qwik';
 import styles from './counter.module.css';
 import Gauge from '../gauge';
@@ -23,6 +24,8 @@ export const Counter = component$(() => {
     // state.value = { count: newValue }; //* This expression is working
     count.value = newValue;
   });
+
+  const print = $((ev: QwikMouseEvent<HTMLButtonElement, MouseEvent>) => console.log('CLICKED', ev));
 
   return (
     <>

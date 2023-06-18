@@ -10,16 +10,23 @@ export default component$(() => {
     {
       count: 0,
       number: 20,
-      setCount: $((ev: Event) => {
-        if (ev.target instanceof HTMLInputElement) {
-          state.count = ev.target.valueAsNumber;
-        }
-      }),
+      // This is not correct, function in state should have "this" as arguments
+      // setCount: $((ev: Event) => {
+      //   if (ev.target instanceof HTMLInputElement) {
+      //     state.count = ev.target.valueAsNumber;
+      //   }
+      // }),
     },
     {
       deep: false, // トッププロパティのみを監視する
     }
   );
+
+  const setCount = $((ev: Event) => {
+    if (ev.target instanceof HTMLInputElement) {
+      state.count = ev.target.valueAsNumber;
+    }
+  });
 
   useVisibleTask$(
     ({ cleanup }) => {
@@ -40,7 +47,7 @@ export default component$(() => {
         <span class="highlight">Generate</span> Flowers
       </h1>
 
-      <input class="input" type="range" value={state.number} max={50} onInput$={state.setCount} />
+      <input class="input" type="range" value={state.number} max={50} onInput$={setCount} />
       <div
         style={{
           '--state': `${state.count * 0.1}`,

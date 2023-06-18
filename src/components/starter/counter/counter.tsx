@@ -1,6 +1,15 @@
 import { component$, useSignal, $ } from '@builder.io/qwik';
 import styles from './counter.module.css';
 import Gauge from '../gauge';
+import { css } from '~/libs/stiches';
+
+const counterWrapper = css({
+  marginTop: '50px',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  gap: '10px',
+});
 
 export const Counter = component$(() => {
   const count = useSignal(70);

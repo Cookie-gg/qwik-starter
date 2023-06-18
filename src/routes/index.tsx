@@ -7,6 +7,8 @@ import Infobox from '~/components/starter/infobox/infobox';
 import Starter from '~/components/starter/next-steps/next-steps';
 
 export default component$(() => {
+  const title = useSignal('Qwik');
+  const description = useSignal('A resumable framework for building instant web applications');
   return (
     <>
       <Hero />
@@ -23,6 +25,19 @@ export default component$(() => {
         <Counter />
       </div>
 
+      <div class="container container-center container-spacing-xl">
+        <h3>You can input and it's reactive in child component</h3>
+        <label>Title</label>
+        <input bind:value={title} type="text" />
+        <hr />
+        <label>Description</label>
+        <textarea bind:value={description} cols={50} />
+        <hr />
+        <Collapsible>
+          <span q:slot="title">{title}</span>
+          {description}
+        </Collapsible>
+      </div>
       <div class="container container-flex">
         <Infobox>
           <div q:slot="title" class="icon icon-cli">
